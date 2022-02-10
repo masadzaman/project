@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './App.css';
 import * as employeeAction from './components/Action/employeeAction';
 
 class App extends Component {
@@ -11,38 +12,46 @@ class App extends Component {
      
     this.state = {
       firstname: '',
-      lastname:''
+      lastname: '',
+      role :''
     }
   }
 
   handleChange(e){
     this.setState({
       firstname: e.target.value,
-      lastname: e.target.value
+      lastname : e.target.value1,
+      role: e.target.value2,
     })
   }
 
   handleSubmit(e){
     e.preventDefault();
     let employee = {
-      first: this.state.firstname,
-      last: this.state.lastname
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
+      role: this.state.role
     }
     this.setState({
       firstname: '',
-      lastname : ''
+      lastname :'',
+      role: ''
     });
     this.props.createEmployee(employee);
   }
 
-  listView(data, index){
+  listView(data, index,index1){
     return (
-     
       <div className="row">
-        <div className="col-md-10">
+        <div className="col-md-05">
           <li key={index} className="list-group-item clearfix">
-            {data.name}
-          </li>
+            {data.firstname}
+            
+            {data.lastname}
+
+            {data.role}
+          
+            </li>
         </div>
         <div className="col-md-2">
           <button onClick={(e) => this.deleteEmployee(e, index)} className="btn btn-danger">
@@ -54,7 +63,7 @@ class App extends Component {
   }
 
   deleteEmployee(e, index){
-    e.preventDefault()
+    e.preventDefault();
     this.props.deleteEmployee(index);
   }
 
@@ -62,8 +71,7 @@ class App extends Component {
 
     return(
       <div className="container">
-       <div>
-       <nav class="navbar sticky-top navbar-light bg-light">
+       <nav className="navbar sticky-top navbar-light bg-light">
         <div class="container-fluid w-50">
             <label for="search-user" class="col-sm-2 col-form-label">Search for employee:</label>
             <div class="col-sm-10">
@@ -71,20 +79,29 @@ class App extends Component {
             </div>
         </div>
     </nav>
+        
         <hr />
         <div>
-          <h3>Add Employee Form</h3>
+          
           <form onSubmit={this.handleSubmit}>
-            <input type="text" onChange={this.handleChange} className="form-control" value={this.state.firstname}/><br />
-              <input type="text" onChange={this.handleChange} className="form-control" value={this.state.lastname}/><br />
+            <input type="text" onChange={this.handleChange} className="form-control" placeholder="Enter first name" value={this.state.firstname}/><br />
+             <input type="text2" onChange={this.handleChange1} className="form-control" placeholder="Enter last name" value={this.state.lastname}/><br />
+             <div class="dropdown">
+  <button class="dropbtn">Dropdown</button>
+  <div class="dropdown-content">
+    <a>User</a>
+    <a>Senior User</a>
+    <a>WFM</a>
+  </div>
+</div>
             <input type="submit" className="btn btn-success" value="ADD"/>
           </form>
           <hr />
         { <ul className="list-group">
-          {this.props.employee.map((employee, i) => this.listView(employee, i))}
+          {this.props.employees.map((employee, i) => this.listView(employee, i))}
+
         </ul> }
         </div>
-      </div>
       </div>
     )
   }
