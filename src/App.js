@@ -7,6 +7,9 @@ class App extends Component {
 
   constructor(props){
     super(props);
+    this.handlefirstName = this.handlefirstName.bind(this);
+    this.handlelastName = this.handlelastName.bind(this);
+    this.hanlerole = this.handlerole.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
      
@@ -16,12 +19,30 @@ class App extends Component {
       role :''
     }
   }
+  onhandlefirstName(e) {
+    this.setState({
+      firstname: e.target.value
+      
+    })
+  }
+   onhandlelastName(e) {
+    this.setState({
+      lastname: e.target.value
+      
+    })
+  }
+  onhandlerole(e) {
+    this.setState({
+      role: e.target.value
+      
+    })
+  }
 
   handleChange(e){
     this.setState({
-      firstname: e.target.value,
-      lastname : e.target.value1,
-      role: e.target.value2,
+      firstname: e.target.firstname,
+      lastname : e.target.lastname,
+      role: e.target.role
     })
   }
 
@@ -84,15 +105,18 @@ class App extends Component {
         <div>
           
           <form onSubmit={this.handleSubmit}>
-            <input type="text" onChange={this.handleChange} className="form-control" placeholder="Enter first name" value={this.state.firstname}/><br />
-             <input type="text2" onChange={this.handleChange1} className="form-control" placeholder="Enter last name" value={this.state.lastname}/><br />
+            <input type="text" onChange={this.handlefirstName} className="form-control" placeholder="Enter first name" value={this.state.firstname}/><br />
+             <input type="text2" onChange={this.handlelastName} className="form-control" placeholder="Enter last name" value={this.state.lastname}/><br />
              <div class="dropdown">
-  <button class="dropbtn">Dropdown</button>
-  <div class="dropdown-content">
-    <a>User</a>
-    <a>Senior User</a>
-    <a>WFM</a>
-  </div>
+        <select className = "form-input"  
+            name = "role"
+            id = "role"
+            value={this.state.role}
+                                  onChange={this.handlerole}>
+                    <option >User</option>
+                    <option >Senior User</option>
+                    <option >WFM</option>
+                  </select>
 </div>
             <input type="submit" className="btn btn-success" value="ADD"/>
           </form>
