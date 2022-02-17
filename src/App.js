@@ -91,10 +91,8 @@ class App extends Component {
   }
 
 
- const [firstname, setFirstName] = useState('');
- const [lastname, setLastname] = useState('');
 
-  // the search result
+ 
   const [foundEmployees, setFoundEmployees] = useState(EMPLOYEES);
   filter = (e) => {
     const keyword = e.target.value;
@@ -148,8 +146,11 @@ class App extends Component {
           </form>
           <hr />
         { <ul className="list-group">
-          {this.props.employees.map((employee, i) => this.listView(employee, i))}
-
+          <div className="row">
+          {this.props.contacts.map((employee, firstname) => this.listView(employee, firstname))}
+          {this.props.contacts.map((employee, lastname) => this.listView(employee, lastname))}
+          {this.props.contacts.map((employee, role) => this.listView(employee, role))}
+          </div>
         </ul> }
         </div>
       </div>
