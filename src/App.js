@@ -95,7 +95,7 @@ class App extends Component {
  const [lastname, setLastname] = useState('');
 
   // the search result
-  const [foundEmployees, setFoundEmployees] = useState(USERS);
+  const [foundEmployees, setFoundEmployees] = useState(EMPLOYEES);
   filter = (e) => {
     const keyword = e.target.value;
 
