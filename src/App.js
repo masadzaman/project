@@ -5,6 +5,7 @@ import * as employeeAction from './components/Action/employeeAction';
 
 class App extends Component {
 
+
   constructor(props){
     super(props);
     this.handlefirstName = this.handlefirstName.bind(this);
@@ -16,7 +17,8 @@ class App extends Component {
     this.state = {
       firstname: '',
       lastname: '',
-      role :''
+      role :'',
+      searchTerm: ''
     }
   }
   onhandlefirstName(e) {
@@ -88,6 +90,29 @@ class App extends Component {
     this.props.deleteEmployee(index);
   }
 
+
+ const [firstname, setFirstName] = useState('');
+ const [lastname, setLastname] = useState('');
+
+  // the search result
+  const [foundEmployees, setFoundEmployees] = useState(USERS);
+  filter = (e) => {
+    const keyword = e.target.value;
+
+    if (keyword !== '') {
+      const results = employees.filter((employee) => {
+        return employee.name.toLowerCase().startsWith(keyword.toLowerCase());
+        
+      });
+      setFoundEmployess(results);
+    } else {
+      setFoundEmployees(EMPLOYEES);
+     
+    }
+
+    setName(keyword);
+  }
+
   render() {
 
     return(
@@ -96,7 +121,8 @@ class App extends Component {
         <div class="container-fluid w-50">
             <label for="search-user" class="col-sm-2 col-form-label">Search for employee:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="search-user" placeholder="Enter a name"/>
+                <input type="text" class="form-control"
+         onChange={filter} id="search-user" placeholder="Enter a name"/>
             </div>
         </div>
     </nav>
